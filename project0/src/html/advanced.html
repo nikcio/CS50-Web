@@ -8,12 +8,18 @@
 </head>
 <body>
     <nav>
-        <a href="image.html">Google image search</a>
-        <a href="advanced.html">Google advanced search</a>
+        <a href="index.html">Google search</a>
     </nav>
     <img id="logo" height="92" src="img/google logo.png">
     <form action="https://google.com/search">
-        <input type="text" name="q">
+        <label>Search</label>
+        <input type="text" name="as_q">
+        <label>Excatly this</label>
+        <input type="text" name="as_epq">
+        <label>Every of these words</label>
+        <input type="text" name="as_oq">
+        <label>None of these</label>
+        <input type="text" name="as_eq">
         <input type="submit" value="Google Search">
     </form>
 </body>
