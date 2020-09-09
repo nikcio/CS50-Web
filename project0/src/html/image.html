@@ -10,11 +10,24 @@
     <nav>
         <a href="index.html">Google search</a>
     </nav>
-    <img id="logo" height="92" src="img/google logo.png">
-    <form action="https://google.com/search">
-        <input type="text" name="q">
-        <input type="hidden" name="tbm" value="isch">
-        <input type="submit" value="Google Search">
-    </form>
+    <div class="content">
+        <img id="logo" height="92" src="img/google logo.png">
+        <form action="https://google.com/search">
+            <div class="search-container">
+                <span class="iconify" data-icon="ant-design:search-outlined" data-inline="false"></span>
+                <input type="text" name="q" class="searchBox">
+                <input type="hidden" name="tbm" value="isch">
+                <span class="iconify" data-icon="ic:sharp-keyboard" data-inline="false"></span>
+                <span class="iconify" data-icon="ic:baseline-mic" data-inline="false"></span>
+            </div>
+            
+            <br>
+            <div>
+                <input type="submit" name="btnK" value="Google Search" class="button">
+            </div>
+        </form>
+    </div>
+    
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
 </body>
 </html>

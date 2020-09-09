@@ -10,17 +10,28 @@
     <nav>
         <a href="index.html">Google search</a>
     </nav>
-    <img id="logo" height="92" src="img/google logo.png">
-    <form action="https://google.com/search">
-        <label>Search</label>
-        <input type="text" name="as_q">
-        <label>Excatly this</label>
-        <input type="text" name="as_epq">
-        <label>Every of these words</label>
-        <input type="text" name="as_oq">
-        <label>None of these</label>
-        <input type="text" name="as_eq">
-        <input type="submit" value="Google Search">
-    </form>
+    <div id="advanced-logo">
+        <img id="logo" class="advanced" height="92" src="img/google logo.png">
+    </div>
+    <div class="content-box">
+        <span class="title">Advanced search</span>
+        <form action="https://google.com/search" class="advanced-search">
+            <span>Find pages with...</span>
+            <label>all these words:</label>
+            <input type="text" name="as_q" class="search-params">
+            <br>
+            <label>this exact word or phrase:</label>
+            <input type="text" name="as_epq" class="search-params">
+            <br>
+            <label>any of these words:</label>
+            <input type="text" name="as_oq" class="search-params">
+            <br>
+            <label>none of these words:</label>
+            <input type="text" name="as_eq" class="search-params">
+            <br>
+            <input type="submit" value="Advanced Search" class="advanced-button">
+        </form>
+    </div>
+    
 </body>
 </html>
