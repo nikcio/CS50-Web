@@ -1,0 +1,41 @@
+.content{
+    text-align: center;
+    margin-top: 89px;
+    height: 300px;
+
+    #logo{
+        padding-top: 90px;
+        margin-bottom: 30px;
+    }
+
+    .search-container{
+        width: auto;
+        max-width: 584px;
+        margin:auto;
+        border: 1px solid rgb(223, 225, 229);
+        border-radius: 20px;
+        svg{
+            color: #5F6368;
+            font-size: 24px;
+            vertical-align: middle;
+        }
+        input{
+            width:83%;
+            color: black;
+            border: 0;
+            height: 40px;
+        }
+        input:focus{
+            outline: none;
+        }
+    }
+    .button{
+        border: 1px solid transparent;
+        color: #5F6368;
+        padding: 11px 16px;
+        margin: 0px 4px;
+    }
+    .button:hover{
+        border: 1px solid #c6c6c6;
+    }
+}
