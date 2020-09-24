@@ -5,7 +5,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('auctions', '0002_auto_20200916_1433'),
     ]
@@ -14,7 +13,8 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='comment',
             name='listing',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='Comments', to='auctions.listing'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='Comments',
+                                    to='auctions.listing'),
         ),
         migrations.AddField(
             model_name='listing',
@@ -24,6 +24,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='listing',
             name='category',
-            field=models.CharField(choices=[('Other', 'Other'), ('Fashion', 'Fashion'), ('Electronics', 'Electronics'), ('Home', 'Home'), ('Toys', 'Toys')], default='Other', max_length=64),
+            field=models.CharField(
+                choices=[('Other', 'Other'), ('Fashion', 'Fashion'), ('Electronics', 'Electronics'), ('Home', 'Home'),
+                         ('Toys', 'Toys')], default='Other', max_length=64),
         ),
     ]

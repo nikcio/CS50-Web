@@ -5,7 +5,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('auctions', '0003_auto_20200916_1821'),
     ]
@@ -14,12 +13,17 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='listing',
             name='category',
-            field=models.CharField(choices=[('Home', 'Home'), ('Fashion', 'Fashion'), ('Electronics', 'Electronics'), ('Other', 'Other'), ('Toys', 'Toys')], default='Other', max_length=64),
+            field=models.CharField(
+                choices=[('Home', 'Home'), ('Fashion', 'Fashion'), ('Electronics', 'Electronics'), ('Other', 'Other'),
+                         ('Toys', 'Toys')], default='Other', max_length=64),
         ),
         migrations.AlterField(
             model_name='listing',
             name='current_bid',
-            field=models.ForeignKey(default=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='listing_start', to='auctions.bid'), null=True, on_delete=django.db.models.deletion.CASCADE, related_name='listing_current', to='auctions.bid'),
+            field=models.ForeignKey(default=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE,
+                                                              related_name='listing_start', to='auctions.bid'),
+                                    null=True, on_delete=django.db.models.deletion.CASCADE,
+                                    related_name='listing_current', to='auctions.bid'),
         ),
         migrations.AlterField(
             model_name='listing',

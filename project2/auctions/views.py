@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django import forms
 
-from .models import User, Listing, Bid, WatchList
+from .models import User, Listing, Bid, WatchList, CATEGORIES
 
 
 def get_watch_id(request):
@@ -79,25 +79,30 @@ def register(request):
 
 
 class CreateListingForm(forms.Form):
-    image = forms.URLField(max_length=1084)
-    description = forms.CharField(max_length=1084)
-    title = forms.CharField(max_length=255)
-    close_date = forms.DateTimeField()
-    starting_bid = forms.IntegerField()
+    image = forms.URLField(max_length=1084,
+                           widget=forms.TextInput({'placeholder': 'https://imagehoster.com/image.png'}))
+    description = forms.CharField(max_length=1084, required=True,
+                                  widget=forms.TextInput({'placeholder': 'Text here...'}))
+    title = forms.CharField(max_length=255, required=True, widget=forms.TextInput({'placeholder': 'Title...'}))
+    close_date = forms.DateTimeField(required=True, input_formats=['%Y-%m-%d'])
+    starting_bid = forms.IntegerField(required=True, widget=forms.TextInput({'placeholder': '100'}))
+    category = forms.ChoiceField(required=True, choices=CATEGORIES)
 
 
 def create_listing(request):
     if request.method == "POST":
-        form = request.POST
+        form = CreateListingForm(request.POST)
         if form.is_valid():
-            start_bid = Bid.objects.create(amount=form["starting_bid"], user=request.user)
+            start_bid = Bid.objects.create(amount=form.cleaned_data["starting_bid"], user=request.user)
             start_bid.save()
-            new_listing = Listing.objects.create(image=form["image"], description=form["description"],
-                                                 title=form["title"],
-                                                 user=request.user, close_date=form["close_date"],
-                                                 starting_bid=start_bid, current_bid=start_bid)
+            new_listing = Listing.objects.create(image=form.cleaned_data["image"],
+                                                 description=form.cleaned_data["description"],
+                                                 title=form.cleaned_data["title"],
+                                                 user=request.user, close_date=form.cleaned_data["close_date"],
+                                                 starting_bid=start_bid, current_bid=start_bid,
+                                                 category=form.cleaned_data["category"])
             new_listing.save()
-            return HttpResponseRedirect("index")
+            return HttpResponseRedirect(reverse("index"))
         else:
             return render(request, "auctions/create.html", {
                 "form": form,
@@ -120,12 +125,39 @@ def listing(request, listing_id):
     return render(request, "auctions/listing.html", {
         "listing": _listing,
         "comments": _listing.comments.all(),
-        "watchlist_id": get_watch_id(request)
+        "watchlist_id": get_watch_id(request),
+        "watchlist_user": WatchList.objects.get(pk=get_watch_id(request))
     })
 
 
 def watchlist(request, watchlist_id):
     return render(request, "auctions/watchlist.html", {
         "watchlist": WatchList.objects.get(pk=watchlist_id),
+        "watchlist_id": get_watch_id(request),
+        "listings": WatchList.objects.get(pk=get_watch_id(request)).listings.filter(active=True)
+    })
+
+
+def categories(request):
+    return render(request, "auctions/categories.html", {
+        "watchlist_id": get_watch_id(request),
+        "items": ["Fashion", "Toys", "Electronics", "Home", "Other"],
+        "category_icons": ["ion:shirt", "whh:teddybear", "jam:computer-f", "dashicons:admin-home", "jam:inboxes"],
+    })
+
+
+def category(request, category_name):
+    return render(request, "auctions/index.html", {
+        "listings": Listing.objects.filter(active=True, category=category_name),
         "watchlist_id": get_watch_id(request)
     })
+
+
+def add_watchlist(request, listing_id):
+    if request.method == "POST":
+        _watchlist = WatchList.objects.get(pk=get_watch_id(request))
+        _watchlist.listings.add(Listing.objects.get(pk=listing_id))
+        _watchlist.save()
+        return HttpResponseRedirect(reverse('listing', kwargs={'listing_id': listing_id}))
+    else:
+        return HttpResponseRedirect(reverse('index'))

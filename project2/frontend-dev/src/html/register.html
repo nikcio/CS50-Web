@@ -1,17 +1,22 @@
-{% extends "auctions/layout.html" %}
-
-{% block body %}
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- inject:partial:partials/head.html -->
+    <!-- endinject -->
+    <!-- inject:css -->
+    <!-- endinject -->
+</head>
+<body>
+<!-- inject:partial:partials/nav.html -->
+<!-- endinject -->
+<div>Signed in as <strong>nikcio</strong>.</div>
 <h1>Register</h1>
-
-{% if message %}
-<div>{{ message }}</div>
-{% endif %}
 
 <div class="container">
     <div class="login-form mx-auto">
-        <form action="{% url 'register' %}" method="post">
-            {% csrf_token %}
+        <form action="/register" method="post">
+            <input type="hidden" name="csrfmiddlewaretoken"
+                   value="BUE3eD3m77yqU9r7vCX3M6rliXx00TE0qe2AOuKjWei547EQCpVeS9WwLIIDWLje">
             <div class="form-group">
                 <input class="form-control" autofocus type="text" name="username" placeholder="Username">
             </div>
@@ -27,10 +32,14 @@
             <input class="btn btn-primary" type="submit" value="Register">
         </form>
 
-        <span>Already have an account? <a href="{% url 'login' %}">Log In here.</a></span>
-
+        <span>Already have an account? <a href="/login">Log In here.</a></span>
     </div>
 </div>
 
 
-{% endblock %}
+<!-- inject:partial:partials/js.html -->
+<!-- endinject -->
+<!-- inject:js -->
+<!-- endinject -->
+</body>
+</html>

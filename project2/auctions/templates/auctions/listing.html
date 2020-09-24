@@ -1,7 +1,45 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>{{listing.title}}</h2>
+<h1>{{listing.title}}</h1>
 
+<div class="listing">
+    <div class="container">
+        <div class="card mb-3">
+            <div class="row no-gutters">
+                <div class="col-md-auto">
+                    {% if listing.image != null %}
+                    <img src="{{listing.image}}" class="card-img-top">
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{listing.title}}</h5>
+                        <h6 class="card-subtitle">${{listing.current_bid.amount}}</h6>
+                        <form action="{% url 'listing' listing.pk %}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="col-atuo">
+                                    <input type="number" class="form-control" placeholder="100.00">
+                                </div>
+
+                                <div class="col-auto">
+                                    <input type="submit" value="Place bid" class="btn btn-primary">
+                                </div>
+                            </div>
+                        </form>
+                        {% if not listing in watchlist_user.listings.all%}
+                        <form action="{% url 'add_watchlist' listing.pk %}" method="POST">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-secondary" value="Add to watchlist">
+                        </form>
+                        {% endif %}
+                        <p class="card-text">{{listing.description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
