@@ -12,6 +12,9 @@ class Bid(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f"${self.amount} by {self.user}"
+
 
 CATEGORIES = {
     ("Fashion", "Fashion"),
@@ -34,6 +37,9 @@ class Listing(models.Model):
                                     blank=True)
     category = models.CharField(max_length=64, choices=CATEGORIES, default="Other")
     active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title
 
 
 class Comment(models.Model):
