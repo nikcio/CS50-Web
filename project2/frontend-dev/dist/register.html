@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- inject:partial:partials/head.html -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auctions</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="/css/styles.css" rel="stylesheet">
+    <!-- endinject -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="css/base.css">
+    <!-- endinject -->
+</head>
+<body>
+<!-- inject:partial:partials/nav.html -->
+<ul class="nav nav-pills">
+    <li class="nav-item">
+        <a class="nav-link active" href="/index.html">Active Listings</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/categories.html">Categories</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/watchlist.html">Watchlist</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/create-listing.html">Create listing</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/index.html">Log Out</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/login.html">Log In</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/register.html">Register</a>
+    </li>
+</ul>
+<hr>
+<!-- endinject -->
+<div>Signed in as <strong>nikcio</strong>.</div>
+<h1>Register</h1>
+
+<div class="container">
+    <div class="login-form mx-auto">
+        <form action="/register" method="post">
+            <input type="hidden" name="csrfmiddlewaretoken"
+                   value="BUE3eD3m77yqU9r7vCX3M6rliXx00TE0qe2AOuKjWei547EQCpVeS9WwLIIDWLje">
+            <div class="form-group">
+                <input class="form-control" autofocus type="text" name="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="email" name="email" placeholder="Email Address">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" name="password" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+            </div>
+            <input class="btn btn-primary" type="submit" value="Register">
+        </form>
+
+        <span>Already have an account? <a href="/login">Log In here.</a></span>
+    </div>
+</div>
+
+
+<!-- inject:partial:partials/js.html -->
+<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+<!-- endinject -->
+<!-- inject:js -->
+<!-- endinject -->
+</body>
+</html>

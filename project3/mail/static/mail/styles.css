@@ -1,0 +1,32 @@
+textarea {
+    min-height: 400px;
+}
+
+.email-item{
+    width: 100%;
+    border: 1px solid black;
+    padding: 5px 0;
+    margin: 10px 0;
+}
+
+.email-item span{
+    display: inline-block;
+    padding: 0 10px;
+
+}
+
+.email-item:hover{
+    background-color: grey;
+}
+
+.read{
+    background-color: lightgray;
+}
+
+#email-detail span{
+    display: block;
+}
+
+#email-detail span:last-child{
+    margin-top: 20px;
+}
