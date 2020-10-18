@@ -68,7 +68,7 @@ function load_mailbox(mailbox) {
         element.append(date);
         element.classList += "email-item";
 
-        if(email["read"] === false){
+        if(email["read"] === true){
           element.classList += " read"
         }
 
@@ -124,7 +124,7 @@ function email_clicked(e) {
     fetch(`/emails/${email}`, {
       method: 'PUT',
       body: JSON.stringify({
-          read: false
+          read: true
       })
     })
     fetch(`/emails/${email}`)

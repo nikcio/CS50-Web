@@ -12,6 +12,7 @@ textarea {
 .email-item span{
     display: inline-block;
     padding: 0 10px;
+    width: 30%;
 
 }
 
