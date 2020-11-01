@@ -1,0 +1,78 @@
+.nav .nav-item a {
+  color: black; }
+
+body {
+  padding: 10px; }
+
+h1 {
+  text-align: center; }
+
+.listing {
+  margin-top: 100px; }
+  .listing .container .card img {
+    max-height: 200px;
+    width: auto; }
+  .listing .container .card .card-body form {
+    padding: 10px 0; }
+
+.listings {
+  width: 100%;
+  max-width: 1400px;
+  margin-top: 100px; }
+  .listings .col {
+    padding: 20px; }
+    .listings .col .card {
+      max-width: 300px; }
+      .listings .col .card a {
+        color: black;
+        width: 100%;
+        height: 100%;
+        text-decoration: none; }
+        .listings .col .card a .card-body {
+          height: 200px;
+          overflow: hidden; }
+          .listings .col .card a .card-body p {
+            height: 200px;
+            width: 100%; }
+      .listings .col .card a:hover {
+        color: white; }
+      .listings .col .card .card-text {
+        padding-top: 5px; }
+
+.categories {
+  width: 100%;
+  max-width: 700px;
+  margin-top: 100px; }
+  .categories .col {
+    padding: 20px; }
+    .categories .col .card {
+      width: 200px; }
+      .categories .col .card a {
+        color: black;
+        width: 100%;
+        height: 100%;
+        text-decoration: none; }
+        .categories .col .card a div h5.card-title {
+          text-align: center;
+          font-size: 24px; }
+        .categories .col .card a div .iconify {
+          margin: auto;
+          width: 100%;
+          font-size: 34px; }
+      .categories .col .card a:hover {
+        color: white; }
+
+.create-listing {
+  width: 50vw;
+  margin-top: 100px; }
+  .create-listing label {
+    width: 150px;
+    font-weight: bold; }
+  .create-listing input {
+    width: 100%; }
+  .create-listing #id_description {
+    height: 200px; }
+
+.login-form {
+  margin-top: 100px;
+  max-width: 500px; }

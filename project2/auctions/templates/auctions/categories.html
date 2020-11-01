@@ -1,0 +1,26 @@
+{% extends "auctions/layout.html" %}
+{% load list_item %}
+
+{% block body %}
+<h1>Categories</h1>
+
+<div class="categories mx-auto">
+    <div class="row row-cols-3">
+        {% for category_item in items %}
+        <div class="col">
+            <div class="card btn btn-primary">
+                <a href="{% url 'category' category_item %}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{category_item}}</h5>
+                        {% with index=forloop.counter %}
+                        <span class="iconify" data-icon="{{category_icons|list_item:forloop.counter0}}"
+                              data-inline="false"></span>
+                        {% endwith %}
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
