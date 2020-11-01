@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- inject:partial:partials/head.html -->
+    <!-- endinject -->
+    <!-- inject:css -->
+    <!-- endinject -->
+</head>
+<body>
+<!-- inject:partial:partials/nav.html -->
+<!-- endinject -->
+<div>Signed in as <strong>nikcio</strong>.</div>
+<h1>Login</h1>
+
+<div class="container">
+    <div class="login-form mx-auto">
+        <form action="/login" method="post">
+            <input type="hidden" name="csrfmiddlewaretoken"
+                   value="qYWDDHmbcpQFddTOQDsBeQMj6GKlwA3Rfikady381wAknb6xXqqMkThuzrVYssI5">
+            <div class="form-group">
+                <input autofocus class="form-control" type="text" name="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" name="password" placeholder="Password">
+            </div>
+            <input class="btn btn-primary" type="submit" value="Login">
+        </form>
+
+        <span>Don't have an account? <a href="/register.html">Register here.</a></span>
+    </div>
+</div>
+
+
+<!-- inject:partial:partials/js.html -->
+<!-- endinject -->
+<!-- inject:js -->
+<!-- endinject -->
+</body>
+</html>

@@ -1,0 +1,124 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<h1>{{listing.title}}</h1>
+
+<div class="listing">
+    <div class="container">
+        <div class="card mb-3">
+            <div class="row no-gutters">
+                <div class="col-md-auto">
+                    {% if listing.image != null %}
+                    <img src="{{listing.image}}" class="card-img-top">
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{listing.title}}</h5>
+                        <h6 class="card-subtitle">${{listing.current_bid.amount}}</h6>
+
+                        {% if user.is_authenticated %}
+
+                            {% if not listing.active %}
+                                <p class="badge badge-danger">Listing has been closed</p>
+
+                                {% if listing.current_bid.user == request.user %}
+                                <p class="badge badge-warning">You have won the bid</p>
+                                {% endif %}
+
+                            {% else %}
+
+                                {% if listing.current_bid.user == request.user %}
+                                <p class="badge badge-success">You are top bidder</p>
+                                {% endif %}
+
+                            {% endif %}
+
+
+
+                            {% if listing in watchlist_user.listings.all %}
+                            <p class="badge badge-secondary">On your watchlist</p>
+                            {% endif %}
+
+                            {% if not listing.current_bid.user == request.user and listing.active and listing.user != user %}
+                            <form action="{% url 'listing' listing.pk %}" method="POST">
+                                {% csrf_token %}
+                                <small class="form-text text-danger">{{message}}</small>
+                                <div class="form-row">
+                                    <div class="col-auto">
+                                        <input type="number" name="amount" class="form-control" placeholder="100.00">
+                                    </div>
+
+                                    <div class="col-auto">
+                                        <input type="submit" value="Place bid" class="btn btn-primary">
+                                    </div>
+                                </div>
+                            </form>
+                            {% endif %}
+
+                            {% if not listing in watchlist_user.listings.all and listing.active %}
+                            <form action="{% url 'add_watchlist' listing.pk %}" method="POST">
+                                {% csrf_token %}
+                                <input type="submit" class="btn btn-secondary" value="Add to watchlist">
+                            </form>
+
+                            {% else %}
+                            <form action="{% url 'remove_watchlist' listing.pk %}" method="POST">
+                                {% csrf_token %}
+                                <input type="submit" class="btn btn-secondary" value="Remove from watchlist">
+                            </form>
+                            {% endif %}
+
+                            {% if listing.user == user and listing.active %}
+                            <form action="{% url 'close_listing' listing.pk %}" method="POST">
+                                {% csrf_token %}
+                                <input type="submit" class="btn btn-danger" value="Close listing">
+                            </form>
+                            {% endif %}
+                        {% endif %}
+                        <p class="card-text">{{listing.description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if user.is_authenticated %}
+
+        <div>
+            <form action="{% url 'add_comment' listing.pk %}" method="POST" >
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-auto">
+                        <input class="form-control" type="text" name="comment" placeholder="Write a comment...">
+                    </div>
+                    <div class="col-auto">
+                        <input type="submit" class="btn btn-primary">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        {% endif %}
+
+        <br>
+
+        {% for comment in comments %}
+
+        <div class="card">
+            <div class="card-body">
+                <span class="card-subtitle">By {{comment.user}}</span>
+                <p class="card-text">{{comment.content}}</p>
+                <small class="card-text">{{comment.date}}</small>
+            </div>
+        </div>
+
+        {% empty %}
+
+        <span>No comments</span>
+
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock %}
