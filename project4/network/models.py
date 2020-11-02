@@ -19,25 +19,15 @@ class Post(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def serialize(self, request_user):
-        return {
+        output = {
             "likes": self.likes,
             "user": self.user.username,
             "content": self.content,
-            "liked": request_user.likes.filter(id=self.id).exists(),
             "id": self.id,
             "time": self.timestamp.strftime("%m-%d-%Y %H:%M%p"),
-            "userid": self.user.id,
-            "following": request_user.following.filter(id=request_user.id).exists()
+            "userid": self.user.id
         }
-
-    def serialize_ano(self):
-        return {
-            "likes": self.likes,
-            "user": self.user.username,
-            "content": self.content,
-            "liked": "ano",
-            "id": self.id,
-            "time": self.timestamp.strftime("%m-%d-%Y %H:%M%p"),
-            "userid": self.user.id,
-            "following": "ano"
-        }
+        if request_user.is_authenticated:
+            output["following"] = request_user.following.filter(id=request_user.id).exists()
+            output["liked"] = request_user.likes.filter(id=self.id).exists()
+        return output

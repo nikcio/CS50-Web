@@ -7,12 +7,9 @@ from django.urls import reverse
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import ListView
 
 from .models import User, Post
-
-
-def index(request):
-    return render(request, "network/index.html")
 
 
 def login_view(request):
@@ -26,7 +23,7 @@ def login_view(request):
         # Check if authentication successful
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("index"))
+            return HttpResponseRedirect(reverse("posts"))
         else:
             return render(request, "network/login.html", {
                 "message": "Invalid username and/or password."
@@ -37,7 +34,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect(reverse("index"))
+    return HttpResponseRedirect(reverse("posts"))
 
 
 def register(request):
@@ -62,23 +59,53 @@ def register(request):
                 "message": "Username already taken."
             })
         login(request, user)
-        return HttpResponseRedirect(reverse("index"))
+        return HttpResponseRedirect(reverse("posts"))
     else:
         return render(request, "network/register.html")
 
 
-def posts(request):
-    if request.user.is_authenticated:
-        posts = Post.objects.all()
-        return JsonResponse([post.serialize(request.user) for post in posts], safe=False)
-    else:
-        posts = Post.objects.all()
-        return JsonResponse([post.serialize_ano() for post in posts], safe=False)
+class Posts(ListView):
+    paginate_by = 10
+    model = Post
+    template_name = 'network/index.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(Posts, self).get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            context["liked"] = self.request.user.likes.all()
+        else:
+            context["liked"] = None
+        return context
 
 
-def following(request):
-    following = request.user.following.all()
-    return JsonResponse([follow_user.serialize() for follow_user in following], safe=False)
+class Following(ListView):
+    paginate_by = 10
+    template_name = 'network/index.html'
+
+    def get_queryset(self):
+        return Post.objects.filter(user__in=self.request.user.following.all())
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(Following, self).get_context_data(**kwargs)
+        context["liked"] = self.request.user.likes.all()
+        return context
+
+
+class UserView(ListView):
+    paginate_by = 10
+    template_name = 'network/user.html'
+
+    def get_queryset(self):
+        return Post.objects.filter(user=User.objects.get(pk=self.kwargs['userid']))
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(UserView, self).get_context_data(**kwargs)
+        context["userid"] = self.kwargs['userid']
+        context["userpage"] = User.objects.get(pk=self.kwargs['userid'])
+        context["following"] = self.request.user.following.all()
+        context["followers"] = User.objects.filter(following=User.objects.get(pk=self.kwargs['userid']))
+        context["liked"] = self.request.user.likes.all()
+        return context
 
 
 @csrf_exempt
@@ -102,13 +129,18 @@ def like(request, post_id):
         data = json.loads(request.body)
         if data.get("like"):
             request.user.likes.add(post)
+            post.likes += 1
+            post.save()
+            print(request.user.likes.count())
             return HttpResponse(status=204)
         else:
             request.user.likes.remove(post)
+            post.likes -= 1
+            post.save()
             return HttpResponse(status=204)
 
     return JsonResponse({
-        "error": "GET or PUT request required."}, status=400)
+        "error": "PUT request required."}, status=400)
 
 
 @csrf_exempt
@@ -124,4 +156,4 @@ def follow(request, user_id):
             return HttpResponse(status=204)
 
     return JsonResponse({
-        "error": "GET or PUT request required."}, status=400)
+        "error": "PUT request required."}, status=400)

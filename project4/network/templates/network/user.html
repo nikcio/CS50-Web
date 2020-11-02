@@ -2,21 +2,15 @@
 {% load static %}
 
 {% block body %}
-<h1 id="title"></h1>
+<h1 id="title">User</h1>
 
-<div id="new-post">
-    <h3>New post</h3>
-    <form id="new-post-form" onsubmit="return false">
-        <textarea class="form-control" id="content" placeholder="Body"></textarea>
-        <input type="submit" class="btn btn-primary"/>
-    </form>
-</div>
+<button id="follow" data-userid="{{userid}}" data-follow="{% if userpage in following %}true{% else %}false{% endif %}">{% if userpage in following %}Unfollow{% else %}Follow{% endif %}</button>
 
 <div id="post-view">
     {% for item in page_obj %}
     <div>
         <div class="list-item">
-            <a href="{% url 'User' item.user.id %}"><strong>{{item.user}}</strong></a>
+            <a href=""><strong>{{item.user}}</strong></a>
             <span>{{item.content}}</span>
             {% if item in liked %}
             <span class="iconify" data-icon="ant-design:heart-filled" data-inline="false" style="color:red;"></span>
