@@ -2,14 +2,18 @@
 {% load static %}
 
 {% block body %}
-<h1 id="title">User</h1>
+<h1 id="title">{{page_obj.0.user}}</h1>
 
-<button id="follow" data-userid="{{userid}}" data-follow="{% if userpage in following %}true{% else %}false{% endif %}">{% if userpage in following %}Unfollow{% else %}Follow{% endif %}</button>
+{% if user.id != userid %}
+<button id="follow" data-userid="{{userid}}" data-follow="{% if following %}true{% else %}false{% endif %}">{% if following %}Unfollow{% else %}Follow{% endif %}</button>
+{% endif %}
+
+<h3 id="followers" data-count="{{followers.count}}">Followers: {{followers.count}}</h3>
 
 <div id="post-view">
     {% for item in page_obj %}
     <div>
-        <div class="list-item">
+        <div class="list-item" id="post-{{item.id}}">
             <a href=""><strong>{{item.user}}</strong></a>
             <span>{{item.content}}</span>
             {% if item in liked %}
@@ -17,9 +21,9 @@
             {% else %}
             <span class="iconify" data-icon="ant-design:heart-outlined" data-inline="false"></span>
             {% endif %}
-            <span>{{item.likes}}</span>
+            <span id="likes">{{item.likes}}</span>
             <span class="time">{{item.timestamp}}</span>
-            <button class="like" data-id="{{item.id}}" data-like="{% if item in liked %}true{% else %}false{% endif %}">{% if item in liked %}Unlike{% else %}Like{% endif %}</button>
+            <button class="like" data-cur_likes="{{item.likes}}" data-id="{{item.id}}" data-like="{% if item in liked %}true{% else %}false{% endif %}">{% if item in liked %}Unlike{% else %}Like{% endif %}</button>
         </div>
     </div>
     {% endfor %}

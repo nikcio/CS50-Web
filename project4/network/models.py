@@ -3,13 +3,20 @@ from django.db import models
 
 
 class User(AbstractUser):
-    following = models.ManyToManyField('self')
     likes = models.ManyToManyField('Post', related_name="likers")
 
     def serialize(self):
         return {
             "username": self.username
         }
+
+
+class Follower(models.Model):
+    following = models.ForeignKey(User, on_delete=models.CASCADE, related_name="followers")
+    follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name="following")
+
+    class Meta:
+        unique_together = ('follower', 'following')
 
 
 class Post(models.Model):

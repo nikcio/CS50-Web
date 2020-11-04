@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView
 
-from .models import User, Post
+from .models import User, Post, Follower
 
 
 def login_view(request):
@@ -68,6 +68,7 @@ class Posts(ListView):
     paginate_by = 10
     model = Post
     template_name = 'network/index.html'
+    ordering = '-timestamp'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(Posts, self).get_context_data(**kwargs)
@@ -83,7 +84,7 @@ class Following(ListView):
     template_name = 'network/index.html'
 
     def get_queryset(self):
-        return Post.objects.filter(user__in=self.request.user.following.all())
+        return Post.objects.filter(user__in=[item.following for item in self.request.user.following.all()]).order_by('-timestamp')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(Following, self).get_context_data(**kwargs)
@@ -102,8 +103,8 @@ class UserView(ListView):
         context = super(UserView, self).get_context_data(**kwargs)
         context["userid"] = self.kwargs['userid']
         context["userpage"] = User.objects.get(pk=self.kwargs['userid'])
-        context["following"] = self.request.user.following.all()
-        context["followers"] = User.objects.filter(following=User.objects.get(pk=self.kwargs['userid']))
+        context["following"] = any(item in self.request.user.following.all() for item in User.objects.get(pk=self.kwargs['userid']).followers.all())
+        context["followers"] = User.objects.get(pk=self.kwargs['userid']).followers.all()
         context["liked"] = self.request.user.likes.all()
         return context
 
@@ -117,6 +118,21 @@ def new_post(request):
     data = json.loads(request.body)
 
     post = Post(user=request.user, likes=0, content=data.get("content"))
+    post.save()
+
+    return JsonResponse({"message": "Post added successfully."}, status=201)
+
+
+@csrf_exempt
+@login_required
+def update_post(request, pk):
+    if request.method != "PUT":
+        return JsonResponse({"error": "POST request required."}, status=400)
+
+    data = json.loads(request.body)
+
+    post = Post.objects.get(pk=pk, user=request.user)
+    post.content = data.get("content")
     post.save()
 
     return JsonResponse({"message": "Post added successfully."}, status=201)
@@ -149,10 +165,10 @@ def follow(request, user_id):
         user = User.objects.get(pk=user_id)
         data = json.loads(request.body)
         if data.get("follow"):
-            request.user.following.add(user)
+            request.user.following.add(Follower.objects.create(following=user, follower=request.user))
             return HttpResponse(status=204)
         else:
-            request.user.following.remove(user)
+            Follower.objects.get(following=user, follower=request.user).delete()
             return HttpResponse(status=204)
 
     return JsonResponse({
