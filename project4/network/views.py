@@ -68,10 +68,11 @@ class Posts(ListView):
     paginate_by = 10
     model = Post
     template_name = 'network/index.html'
-    ordering = '-timestamp'
+    ordering = "-timestamp"
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(Posts, self).get_context_data(**kwargs)
+        context["title"] = "All posts"
         if self.request.user.is_authenticated:
             context["liked"] = self.request.user.likes.all()
         else:
@@ -89,6 +90,7 @@ class Following(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(Following, self).get_context_data(**kwargs)
         context["liked"] = self.request.user.likes.all()
+        context["title"] = "Following"
         return context
 
 
@@ -97,15 +99,17 @@ class UserView(ListView):
     template_name = 'network/user.html'
 
     def get_queryset(self):
-        return Post.objects.filter(user=User.objects.get(pk=self.kwargs['userid']))
+        return Post.objects.filter(user=User.objects.get(pk=self.kwargs['userid'])).order_by('-timestamp')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(UserView, self).get_context_data(**kwargs)
         context["userid"] = self.kwargs['userid']
         context["userpage"] = User.objects.get(pk=self.kwargs['userid'])
-        context["following"] = any(item in self.request.user.following.all() for item in User.objects.get(pk=self.kwargs['userid']).followers.all())
+        if self.request.user.is_authenticated:
+            context["following"] = any(item in self.request.user.following.all() for item in User.objects.get(pk=self.kwargs['userid']).followers.all())
+            context["liked"] = self.request.user.likes.all()
         context["followers"] = User.objects.get(pk=self.kwargs['userid']).followers.all()
-        context["liked"] = self.request.user.likes.all()
+        context["followingusers"] = User.objects.get(pk=self.kwargs['userid']).following.all()            
         return context
 
 

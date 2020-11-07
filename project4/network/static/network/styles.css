@@ -1,0 +1,44 @@
+#new-post{
+    width: 50vw;
+    display: block;
+    padding: 15px;
+    margin: auto;
+}
+
+#post-view{
+    padding: 15px;
+}
+
+.list-item{
+    display: block;
+    width: 50vw;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px 15px;
+    margin: 20px auto;
+}
+
+.list-item a, .list-item #content, .list-item textarea{
+    display: block;
+    padding-bottom: 10px;
+}
+
+.pagination{
+    padding-top: 20px;
+    margin: auto;
+    display: block;
+    width: 20vw;
+    text-align: center;
+}
+
+.time{
+    float: right;
+}
+
+.like, .edit{
+    margin: 0 5px;
+}
+
+#title{
+    padding: 10px;
+}
