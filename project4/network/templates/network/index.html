@@ -1,0 +1,57 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+<h1 id="title">{{title}}</h1>
+
+<div id="new-post">
+    <h3>New post</h3>
+    <form id="new-post-form" onsubmit="return false">
+        <textarea class="form-control" id="content" placeholder="Body"></textarea>
+        <input type="submit" class="btn btn-primary"/>
+    </form>
+</div>
+
+<div id="post-view">
+    {% for item in page_obj %}
+    <div>
+        <div class="list-item" id="post-{{item.id}}">
+            <a href="{% url 'User' item.user.id %}"><strong>{{item.user}}</strong></a>
+            <span class="content" id="content">{{item.content}}</span>
+            {% if item in liked %}
+            <span class="iconify" data-icon="ant-design:heart-filled" data-inline="false" style="color:red;"></span>
+            {% else %}
+            <span class="iconify" data-icon="ant-design:heart-outlined" data-inline="false"></span>
+            {% endif %}
+            <span id="likes">{{item.likes}}</span>
+            {% if item.user == user %}
+            <button class="edit btn btn-primary btn-sm" data-id="{{item.id}}" data-edit="true">Edit</button>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <button class="like btn btn-primary btn-sm" data-cur_likes="{{item.likes}}" data-id="{{item.id}}" data-like="{% if item in liked %}true{% else %}false{% endif %}">{% if item in liked %}Unlike{% else %}Like{% endif %}</button>
+            {% endif %}
+            <span class="time">{{item.timestamp}}</span>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'network/index.js' %}"></script>
+{% endblock %}
