@@ -1,0 +1,48 @@
+@import "colors";
+
+#footer{
+    nav{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        
+        ul{
+            li{
+                a{
+                    display: inline;
+                    background-color: transparent;
+                    border: none;
+                    color: $TextColor;
+                }
+
+                a.disabled{
+                    color: rgba($TextColor, 0.5);
+                }
+
+                a.page-num{
+                    border: 3px solid $TextColor;
+                    border-radius: 10px;
+                }
+
+                .iconify{
+                    position: absolute;
+                    color: $TextColor;
+                    font-size: 24px;
+
+                }
+
+                .iconify.left{
+                    right: 120%;
+                }
+
+                .iconify.right{
+                    left: 120%;
+                }
+            }
+
+            li.active{
+                margin: auto 15px;
+            }
+        }
+    }
+}
