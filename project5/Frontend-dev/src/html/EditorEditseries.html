@@ -15,7 +15,7 @@
     </nav>
 
     <section id="new-media">
-        <h1 id="title">New movie</h1>
+        <h1 id="title">Edit series</h1>
 
         <form>
             <div class="form-group">
@@ -35,6 +35,10 @@
                 <input type="text" class="form-control" id="Date" placeholder="2020/01/20">
             </div>
             <div class="form-group">
+                <label for="Seasons">Seasons:</label>
+                <input type="number" class="form-control" id="Seasons" placeholder="1">
+            </div>
+            <div class="form-group">
                 <label for="Description">Description:</label>
                 <input type="text" class="form-control" id="Description" placeholder="">
             </div>
@@ -43,7 +47,9 @@
                 <input type="file" class="form-control" id="Image">
             </div>
             <div class="login-controls">
-                <button type="submit" class="btn btn-primary">Add movie</button></div>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary secondary">Delete</button>
+            </div>
           </form>
     </section>
 
