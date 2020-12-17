@@ -1,0 +1,31 @@
+#manage {
+  height: 50vh; }
+  #manage .buttons {
+    height: 100%;
+    width: 80vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto; }
+    #manage .buttons button {
+      color: #FFF;
+      background-color: #E50914;
+      font-weight: bold;
+      margin: 5px;
+      width: 35%;
+      display: inline-block;
+      font-size: 30px;
+      padding: 5px;
+      border-radius: 10px;
+      border: 3px solid #E50914; }
+      @media only screen and (max-width: 600px) {
+        #manage .buttons button {
+          font-size: 20px;
+          width: 80%; } }
+    #manage .buttons button:hover {
+      background-color: rgba(229, 9, 20, 0.5); }
+    #manage .buttons .secondary {
+      background-color: transparent;
+      border: 3px solid #E50914; }
+    #manage .buttons .secondary:hover {
+      background-color: rgba(229, 9, 20, 0.5); }

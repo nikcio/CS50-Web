@@ -1,10 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>signup</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block css %}
+    <link rel="stylesheet" href="{% static '/accounts/css/LoginScreen.css' %}">
+{% endblock %}
+
+{% block body %}
+    <section id="login">
+        <img src="{% static 'webapp/img/Logo-big.png' %}" id="logo" alt="Logo">
+
+        <form>
+            <div class="form-group">
+              <label for="Username">Username:</label>
+              <input type="text" class="form-control" id="Username" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+              <label for="Password">Password:</label>
+              <input type="password" class="form-control" id="Password" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label for="ConfirmPassword">Confirm password:</label>
+                <input type="password" class="form-control" id="ConfirmPassword" placeholder="Confirm password">
+              </div>
+            <div class="login-controls">
+                <button type="submit" class="btn btn-primary">Register</button>
+                <button type="submit" class="btn btn-primary secondary">Go back</button>
+            </div>
+          </form>
+    </section>
+{% endblock %}

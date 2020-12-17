@@ -3,8 +3,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 
 
 class Index(LoginRequiredMixin, ListView):
-    template_name = "webapp/index.html"
+    template_name = "webapp/Home.html"
 
 
 class EditorsHome(LoginRequiredMixin, PermissionRequiredMixin, ListView):
-    template_name = "webapp/editorHome.html"
+    template_name = "webapp/EditorHome.html"

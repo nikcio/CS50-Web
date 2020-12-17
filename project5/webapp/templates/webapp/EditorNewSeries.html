@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- inject:partial:partials/head.html -->
-    <!-- endinject -->
-    <!-- inject:css -->
-    <!-- endinject -->
-</head>
-<body id="body">
-    
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static '/accounts/css/newMedia.css' %}">
+{% endblock %}
+
+{% block body %}
     <nav class="navbar navbar-expand-lg navbar-dark" id="view-trailer">
-        <img src="img/logo-small.png" alt="Logo">
-        
+        <img src="{% static 'webapp/img/logo-small.png' %}" alt="Logo">
+
         <button type="button" class="btn secondary">Go back</button>
     </nav>
 
@@ -19,8 +17,8 @@
 
         <form>
             <div class="form-group">
-              <label for="Title">Title:</label>
-              <input type="text" class="form-control" id="Title" placeholder="Title">
+              <label for="SeriesTitle">Title:</label>
+              <input type="text" class="form-control" id="SeriesTitle" placeholder="Title">
             </div>
             <div class="form-group">
                 <label for="Genre">Genre:</label>
@@ -50,8 +48,4 @@
                 <button type="submit" class="btn btn-primary">Add series</button></div>
           </form>
     </section>
-
-    <!-- inject:js -->
-    <!-- endinject -->
-</body>
-</html>
+{% endblock %}

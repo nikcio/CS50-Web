@@ -31,8 +31,8 @@
 
     <section id="manage">
         <div class="buttons">
-            <button class="btn">New movie</button>
-            <button class="btn secondary">New series</button>
+            <button class="btn secondary">New movie</button>
+            <button class="btn">New series</button>
         </div>
     </section>
 
@@ -42,7 +42,7 @@
             {% for item in items %}
             <div class="mediaItem">
                 <button type="button" data-toggle="modal" data-target="#exampleModal" class="details">
-                    <img src="{% static 'webapp/img/Item.png' %}" alt="">
+                    <img src="img/Item.png" alt="">
                     <span class="mediaTitle">TITLE GOES HERE</span>
                 </button>
             </div>
@@ -122,3 +122,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://code.iconify.design/1/1.0.4/iconify.min.js"></script>
 {% endblock %}
+
+    <!-- inject:partial:partials/nav.html -->
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://code.iconify.design/1/1.0.4/iconify.min.js"></script>
+
+    <!-- endinject -->
+
+    <!-- inject:js -->
+    <!-- endinject -->
+</body>
+</html>

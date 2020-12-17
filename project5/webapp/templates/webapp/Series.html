@@ -3,7 +3,6 @@
 
 {% block css %}
     <link rel="stylesheet" href="{% static '/accounts/css/home.css' %}">
-    <link rel="stylesheet" href="{% static '/accounts/css/editorhero.css' %}">
 {% endblock %}
 
 {% block body %}
@@ -29,20 +28,38 @@
     </nav>
     <!-- endinject -->
 
-    <section id="manage">
-        <div class="buttons">
-            <button class="btn">New movie</button>
-            <button class="btn secondary">New series</button>
+    <section id="hero">
+        <div id="hero-image"></div>
+        <div id="hero-details">
+            <h1>TITLE GOES HERE</h1>
+            <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+                View details
+            </button>
         </div>
+
     </section>
 
-    <section id="all-movies">
-        <h2>All movies</h2>
+    <section id="new-entries">
+        <h2>New entries</h2>
         <div class="row">
             {% for item in items %}
             <div class="mediaItem">
                 <button type="button" data-toggle="modal" data-target="#exampleModal" class="details">
-                    <img src="{% static 'webapp/img/Item.png' %}" alt="">
+                    <img src="img/Item.png" alt="">
+                    <span class="mediaTitle">TITLE GOES HERE</span>
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section id="all-movies">
+        <h2>All Series</h2>
+        <div class="row">
+            {% for item in items %}
+            <div class="mediaItem">
+                <button type="button" data-toggle="modal" data-target="#exampleModal" class="details">
+                    <img src="img/Item.png" alt="">
                     <span class="mediaTitle">TITLE GOES HERE</span>
                 </button>
             </div>
@@ -51,7 +68,7 @@
     </section>
 
     <section id="details">
-        <!-- inject:partial:partials/editorDetails.html -->
+        <!-- inject:partial:partials/details.html -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
@@ -75,8 +92,6 @@
                         <button type="button" class="btn view-trailer" data-url="google.com">View trailer</button>
                         <span><strong>Genre:</strong> Action</span>
                         <span><strong>Date:</strong> September 2020</span>
-
-                        <button type="button" class="btn edit" data-url="google.com">Edit</button>
                     </div>
                   </div>
                 </div>

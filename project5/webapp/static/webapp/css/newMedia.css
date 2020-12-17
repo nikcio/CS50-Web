@@ -1,0 +1,80 @@
+nav {
+  position: absolute;
+  top: 0; }
+  @media only screen and (max-width: 450px) {
+    nav img {
+      width: 150px; } }
+  nav button {
+    font-weight: bold;
+    margin: 5px;
+    display: inline-block;
+    font-size: 30px;
+    padding: 5px;
+    border-radius: 10px;
+    color: #FFF; }
+    @media only screen and (max-width: 450px) {
+      nav button {
+        font-size: 20px; } }
+  nav .secondary {
+    background-color: transparent;
+    border: 2px solid #FFF; }
+  nav .secondary:hover {
+    background-color: rgba(229, 9, 20, 0.5); }
+
+#new-media {
+  text-align: center;
+  max-width: 500px;
+  width: 50vw;
+  display: block;
+  margin: auto;
+  margin-top: 15vh; }
+  #new-media span#title {
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.7); }
+  @media only screen and (max-width: 1000px) {
+    #new-media {
+      width: 100%; } }
+  @media only screen and (max-width: 600px) {
+    #new-media {
+      padding: 25px; } }
+  #new-media form {
+    font-weight: bold;
+    text-align: left; }
+    #new-media form .form-group {
+      width: 90%;
+      display: block;
+      margin: auto;
+      margin-top: 25px; }
+      @media only screen and (max-width: 1000px) {
+        #new-media form .form-group {
+          width: 100%; } }
+      #new-media form .form-group input {
+        background-color: transparent;
+        border: 3px solid #E50914;
+        border-radius: 10px;
+        color: #FFF; }
+    #new-media form .login-controls {
+      width: 100%;
+      margin-top: 20px;
+      display: flex;
+      justify-content: center; }
+      #new-media form .login-controls button {
+        background-color: #E50914;
+        font-weight: bold;
+        margin: 5px;
+        width: 35%;
+        display: inline-block;
+        font-size: 30px;
+        padding: 5px;
+        border-radius: 10px;
+        border: 3px solid #E50914; }
+        @media only screen and (max-width: 450px) {
+          #new-media form .login-controls button {
+            font-size: 20px; } }
+      #new-media form .login-controls button:hover {
+        background-color: rgba(229, 9, 20, 0.5); }
+      #new-media form .login-controls .secondary {
+        background-color: transparent;
+        border: 3px solid #E50914; }
+      #new-media form .login-controls .secondary:hover {
+        background-color: rgba(229, 9, 20, 0.5); }
