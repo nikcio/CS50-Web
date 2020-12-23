@@ -7,7 +7,7 @@
     justify-content: center;
     align-items: center;
     margin: auto; }
-    #manage .buttons button {
+    #manage .buttons button, #manage .buttons a {
       color: #FFF;
       background-color: #E50914;
       font-weight: bold;
@@ -19,10 +19,10 @@
       border-radius: 10px;
       border: 3px solid #E50914; }
       @media only screen and (max-width: 600px) {
-        #manage .buttons button {
+        #manage .buttons button, #manage .buttons a {
           font-size: 20px;
           width: 80%; } }
-    #manage .buttons button:hover {
+    #manage .buttons button:hover, #manage .buttons a:hover {
       background-color: rgba(229, 9, 20, 0.5); }
     #manage .buttons .secondary {
       background-color: transparent;

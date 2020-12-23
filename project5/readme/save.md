@@ -1,0 +1,3 @@
+# Save system
+
+As mentioned the save system of this project resembels that of the like system form the networking assignment. The system uses javascript to hit the django server with the information that should be changed (wheter the user has saved the media item). This is done when the heart symbol is pressed and the javascript also makes sure to change the symbol so the user can see wheter the item is saved or not.

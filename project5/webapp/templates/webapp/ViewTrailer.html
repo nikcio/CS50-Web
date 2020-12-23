@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block css %}
+    <link rel="stylesheet" href="{% static '/webapp/css/viewTrailer.css' %}">
+{% endblock %}
+
 {% block body %}
     <nav class="navbar navbar-expand-lg navbar-dark" id="view-trailer">
-        <img src="img/logo-small.png" alt="Logo">
+        <img src="{% static 'webapp/img/logo-small.png' %}" alt="Logo">
         
-        <button type="button" class="btn secondary">Go back</button>
+        <a href="{% url 'index' %}" class="btn secondary">Go back</a>
     </nav>
 
-    <iframe src="https://www.youtube.com/embed/gBwVUGUOlbM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe src="{{object.trailerUrl}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 {% endblock %}

@@ -4,7 +4,7 @@ nav {
   @media only screen and (max-width: 450px) {
     nav img {
       width: 150px; } }
-  nav button {
+  nav button, nav a {
     font-weight: bold;
     margin: 5px;
     display: inline-block;
@@ -13,7 +13,7 @@ nav {
     border-radius: 10px;
     color: #FFF; }
     @media only screen and (max-width: 450px) {
-      nav button {
+      nav button, nav a {
         font-size: 20px; } }
   nav .secondary {
     background-color: transparent;
@@ -58,7 +58,7 @@ nav {
       margin-top: 20px;
       display: flex;
       justify-content: center; }
-      #new-media form .login-controls button {
+      #new-media form .login-controls button, #new-media form .login-controls a {
         background-color: #E50914;
         font-weight: bold;
         margin: 5px;
@@ -69,9 +69,9 @@ nav {
         border-radius: 10px;
         border: 3px solid #E50914; }
         @media only screen and (max-width: 450px) {
-          #new-media form .login-controls button {
+          #new-media form .login-controls button, #new-media form .login-controls a {
             font-size: 20px; } }
-      #new-media form .login-controls button:hover {
+      #new-media form .login-controls button:hover, #new-media form .login-controls a:hover {
         background-color: rgba(229, 9, 20, 0.5); }
       #new-media form .login-controls .secondary {
         background-color: transparent;

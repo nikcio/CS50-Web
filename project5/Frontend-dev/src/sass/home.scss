@@ -26,7 +26,7 @@
             font-size: 48px;
         }
         
-        button {
+        button, a{
             font-weight: normal;
             color: $TextColor;
             background-color: $BackgroundColor;
@@ -42,6 +42,17 @@
 
     display: block;
     margin-bottom: 20px;
+
+    img{
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        border-radius: 10px;
+    }
+    
+    button, a{
+        height: 100%;
+    }
 
     h2{
         margin-left: 10vw;
@@ -59,7 +70,7 @@
             height: 130px;
             width: 230px;
 
-            button{
+            button, a{
                 background-color: Transparent;
                 background-repeat:no-repeat;
                 border: none;
@@ -75,7 +86,7 @@
 
         .mediaItem:hover{
 
-            button{
+            button, a{
                 
                 .mediaTitle{
                     color: $TextColor;
@@ -124,7 +135,7 @@
                 border-radius: 10px 10px 0 0;
             }
 
-            button{
+            button, a{
                 position: relative;
                 z-index: 10;
                 padding: 0;
@@ -137,12 +148,12 @@
                 align-items: center;
             }
 
-            button.close-modal{
+            button.close-modal, a.close-modal{
                 bottom: 290px;
                 right: 20px;
             }
 
-            button.save-modal{
+            button.save-modal, a.save-modal{
                 bottom: 250px;
                 right: 20px;
                 margin: -1rem -1rem -1rem auto;
@@ -152,7 +163,7 @@
                 opacity: .5;
             }
 
-            button.save-modal:hover{
+            button.save-modal:hover, a.save-modal:hover{
                 opacity: 1;
             }
         }

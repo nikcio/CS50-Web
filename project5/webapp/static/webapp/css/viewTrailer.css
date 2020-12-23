@@ -2,7 +2,7 @@
   nav#view-trailer img {
     width: 150px; } }
 
-nav#view-trailer button {
+nav#view-trailer button, nav#view-trailer a {
   font-weight: bold;
   margin: 5px;
   display: inline-block;
@@ -11,7 +11,7 @@ nav#view-trailer button {
   border-radius: 10px;
   color: #FFF; }
   @media only screen and (max-width: 450px) {
-    nav#view-trailer button {
+    nav#view-trailer button, nav#view-trailer a {
       font-size: 20px; } }
 
 nav#view-trailer .secondary {

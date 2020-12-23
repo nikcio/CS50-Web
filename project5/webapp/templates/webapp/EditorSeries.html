@@ -2,8 +2,8 @@
 {% load static %}
 
 {% block css %}
-    <link rel="stylesheet" href="{% static '/accounts/css/home.css' %}">
-    <link rel="stylesheet" href="{% static '/accounts/css/editorhero.css' %}">
+    <link rel="stylesheet" href="{% static '/webapp/css/home.css' %}">
+    <link rel="stylesheet" href="{% static '/webapp/css/editorhero.css' %}">
 {% endblock %}
 
 {% block body %}
@@ -15,14 +15,14 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'editor_home' %}">Movies</a>
+                </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/home.html">Movies</a>
+                    <a class="nav-link" href="{% url 'editor_series' %}">Series</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/series.html">Series</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/saved.html">Saved</a>
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                 </li>
             </ul>
         </div>
@@ -31,19 +31,19 @@
 
     <section id="manage">
         <div class="buttons">
-            <button class="btn secondary">New movie</button>
-            <button class="btn">New series</button>
+            <a href="{% url 'editor_new_movie' %}" class="btn secondary">New movie</a>
+            <a href="{% url 'editor_new_series' %}" class="btn">New series</a>
         </div>
     </section>
 
     <section id="all-movies">
-        <h2>All movies</h2>
+        <h2>All series</h2>
         <div class="row">
-            {% for item in items %}
-            <div class="mediaItem">
+            {% for item in page_obj %}
+            <div class="mediaItem" data-id="{{item.id}}">
                 <button type="button" data-toggle="modal" data-target="#exampleModal" class="details">
-                    <img src="img/Item.png" alt="">
-                    <span class="mediaTitle">TITLE GOES HERE</span>
+                    <img src="{{item.image.url}}" alt="">
+                    <span class="mediaTitle">{{item.title}}</span>
                 </button>
             </div>
             {% endfor %}
@@ -61,8 +61,12 @@
                   <button type="button" class="close close-modal" data-dismiss="modal" aria-label="Close">
                     <span class="iconify" data-inline="false" data-icon="radix-icons:cross-2" style="color: #ffffff; font-size: 25px;"></span>
                   </button>
-                  <button type="button" class="save-modal" data-id="1">
+                  <button type="button" class="save-modal" data-save="{% if item in saved %}true{% else %}false{% endif %}">
+                      {% if item in saved %}
+                    <span class="iconify" data-inline="false" data-icon="ant-design:heart-filled" style="color: red; font-size: 25px;"></span>
+                      {% else %}
                     <span class="iconify" data-inline="false" data-icon="ant-design:heart-outlined" style="color: #ffffff; font-size: 25px;"></span>
+                      {% endif %}
                   </button>
                 </div>
                 <div class="modal-body">
@@ -72,11 +76,11 @@
                     </div>
 
                     <div class="col-12 col-sm">
-                        <button type="button" class="btn view-trailer" data-url="google.com">View trailer</button>
+                        <a type="button" class="btn view-trailer">View trailer</a>
                         <span><strong>Genre:</strong> Action</span>
                         <span><strong>Date:</strong> September 2020</span>
 
-                        <button type="button" class="btn edit" data-url="google.com">Edit</button>
+                        <a type="button" class="btn edit">Edit</a>
                     </div>
                   </div>
                 </div>
@@ -89,9 +93,11 @@
     <!-- inject:partial:partials/footer.html -->
     <section id="footer">
       <nav>
+      {% if is_paginated %}
         <ul class="pagination">
           <li class="page-item">
-            <a class="page-link disabled" href="#" tabindex="-1">
+          {% if page_obj.has_previous %}
+            <a class="page-link disabled" tabindex="-1">
                 <span
               class="iconify left"
               data-inline="true"
@@ -99,21 +105,42 @@
             ></span>
                 Prev
             </a>
+          {% else %}
+              <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">
+                <span
+              class="iconify left"
+              data-inline="true"
+              data-icon="bx:bxs-chevron-left"
+            ></span>
+                Prev
+            </a>
+          {% endif %}
           </li>
           <li class="page-item active">
-            <a class="page-link page-num" href="#">1</a>
+            <a class="page-link page-num">{{ page_obj.number }}</a>
           </li>
           <li class="page-item">
-            <a class="page-link" href="#">Next
+          {% if page_obj.has_next %}
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next
                 <span
                 class="iconify right"
                 data-inline="true"
                 data-icon="bx:bxs-chevron-right"
               ></span>
             </a>
+          {% else %}
+              <a class="page-link disabled">Next
+                <span
+                class="iconify right"
+                data-inline="true"
+                data-icon="bx:bxs-chevron-right"
+              ></span>
+            </a>
+          {% endif %}
 
           </li>
         </ul>
+      {% endif %}
       </nav>
     </section>
 {% endblock %}
@@ -121,17 +148,5 @@
 {% block js %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://code.iconify.design/1/1.0.4/iconify.min.js"></script>
+    <script src="{% static 'webapp/js/combined.js' %}"></script>
 {% endblock %}
-
-    <!-- inject:partial:partials/nav.html -->
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://code.iconify.design/1/1.0.4/iconify.min.js"></script>
-
-    <!-- endinject -->
-
-    <!-- inject:js -->
-    <!-- endinject -->
-</body>
-</html>

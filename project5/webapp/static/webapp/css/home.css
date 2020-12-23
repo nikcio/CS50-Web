@@ -19,7 +19,7 @@
     font-weight: bold;
     text-shadow: 0px 5px #000000;
     font-size: 48px; }
-  #hero #hero-details button {
+  #hero #hero-details button, #hero #hero-details a {
     font-weight: normal;
     color: #FFF;
     background-color: #141414;
@@ -30,6 +30,13 @@
 #new-entries, #all-movies, #all-series {
   display: block;
   margin-bottom: 20px; }
+  #new-entries img, #all-movies img, #all-series img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    border-radius: 10px; }
+  #new-entries button, #new-entries a, #all-movies button, #all-movies a, #all-series button, #all-series a {
+    height: 100%; }
   #new-entries h2, #all-movies h2, #all-series h2 {
     margin-left: 10vw; }
   #new-entries .row, #all-movies .row, #all-series .row {
@@ -42,16 +49,16 @@
       margin: 10px;
       height: 130px;
       width: 230px; }
-      #new-entries .row .mediaItem button, #all-movies .row .mediaItem button, #all-series .row .mediaItem button {
+      #new-entries .row .mediaItem button, #new-entries .row .mediaItem a, #all-movies .row .mediaItem button, #all-movies .row .mediaItem a, #all-series .row .mediaItem button, #all-series .row .mediaItem a {
         background-color: Transparent;
         background-repeat: no-repeat;
         border: none;
         cursor: pointer;
         overflow: hidden;
         outline: none; }
-        #new-entries .row .mediaItem button .mediaTitle, #all-movies .row .mediaItem button .mediaTitle, #all-series .row .mediaItem button .mediaTitle {
+        #new-entries .row .mediaItem button .mediaTitle, #new-entries .row .mediaItem a .mediaTitle, #all-movies .row .mediaItem button .mediaTitle, #all-movies .row .mediaItem a .mediaTitle, #all-series .row .mediaItem button .mediaTitle, #all-series .row .mediaItem a .mediaTitle {
           display: none; }
-    #new-entries .row .mediaItem:hover button .mediaTitle, #all-movies .row .mediaItem:hover button .mediaTitle, #all-series .row .mediaItem:hover button .mediaTitle {
+    #new-entries .row .mediaItem:hover button .mediaTitle, #new-entries .row .mediaItem:hover a .mediaTitle, #all-movies .row .mediaItem:hover button .mediaTitle, #all-movies .row .mediaItem:hover a .mediaTitle, #all-series .row .mediaItem:hover button .mediaTitle, #all-series .row .mediaItem:hover a .mediaTitle {
       color: #FFF;
       display: block;
       position: relative;
@@ -86,7 +93,7 @@
       background-image: url("/img/ItemHQ.jpg");
       background-image: linear-gradient(180deg, rgba(20, 20, 20, 0) 68%, #141414 100%), url("/img/ItemHQ.jpg");
       border-radius: 10px 10px 0 0; }
-    #details .modal-content .modal-header button {
+    #details .modal-content .modal-header button, #details .modal-content .modal-header a {
       position: relative;
       z-index: 10;
       padding: 0;
@@ -97,10 +104,10 @@
       display: flex;
       justify-content: center;
       align-items: center; }
-    #details .modal-content .modal-header button.close-modal {
+    #details .modal-content .modal-header button.close-modal, #details .modal-content .modal-header a.close-modal {
       bottom: 290px;
       right: 20px; }
-    #details .modal-content .modal-header button.save-modal {
+    #details .modal-content .modal-header button.save-modal, #details .modal-content .modal-header a.save-modal {
       bottom: 250px;
       right: 20px;
       margin: -1rem -1rem -1rem auto;
@@ -108,7 +115,7 @@
       float: right;
       cursor: pointer;
       opacity: .5; }
-    #details .modal-content .modal-header button.save-modal:hover {
+    #details .modal-content .modal-header button.save-modal:hover, #details .modal-content .modal-header a.save-modal:hover {
       opacity: 1; }
   #details .modal-content .modal-body {
     margin-bottom: 10vh; }

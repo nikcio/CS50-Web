@@ -9,22 +9,39 @@
     <section id="login">
         <img src="{% static 'webapp/img/Logo-big.png' %}" id="logo" alt="Logo">
 
-        <form>
+        <form method="post" action="{% url 'signup' %}">
+            {% csrf_token %}
             <div class="form-group">
               <label for="Username">Username:</label>
-              <input type="text" class="form-control" id="Username" placeholder="Enter username">
+              <input type="text" class="form-control" id="Username" placeholder="Enter username" name="{{ form.username.html_name }}">
+                {% for error in form.username.errors %}
+                <p style="color: white">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+              <label for="Email">Email:</label>
+              <input type="email" class="form-control" id="Email" placeholder="Enter email" name="{{ form.email.html_name }}">
+                {% for error in form.email.errors %}
+                <p style="color: white">{{ error }}</p>
+                {% endfor %}
             </div>
             <div class="form-group">
               <label for="Password">Password:</label>
-              <input type="password" class="form-control" id="Password" placeholder="Password">
+              <input type="password" class="form-control" id="Password" placeholder="Password" name="{{ form.password1.html_name }}">
+                {% for error in form.password1.errors %}
+                <p style="color: white">{{ error }}</p>
+                {% endfor %}
             </div>
             <div class="form-group">
                 <label for="ConfirmPassword">Confirm password:</label>
-                <input type="password" class="form-control" id="ConfirmPassword" placeholder="Confirm password">
+                <input type="password" class="form-control" id="ConfirmPassword" placeholder="Confirm password" name="{{ form.password2.html_name }}">
+                {% for error in form.password2.errors %}
+                <p style="color: white">{{ error }}</p>
+                {% endfor %}
               </div>
             <div class="login-controls">
                 <button type="submit" class="btn btn-primary">Register</button>
-                <button type="submit" class="btn btn-primary secondary">Go back</button>
+                <a href="/accounts/login/" class="btn btn-primary secondary">Go back</a>
             </div>
           </form>
     </section>

@@ -10,7 +10,7 @@ nav{
         }
     }
 
-    button{
+    button, a{
         font-weight: bold;
         margin: 5px;
         display: inline-block;
@@ -86,7 +86,7 @@ nav{
             display: flex;
             justify-content: center;
 
-            button{
+            button, a{
                 background-color: $ControlColor;
                 font-weight: bold;
                 margin: 5px;
@@ -104,7 +104,7 @@ nav{
                 
             }
 
-            button:hover{
+            button:hover, a:hover{
                 background-color: rgba($ControlColor, 0.5);
             }
 
