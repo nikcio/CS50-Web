@@ -2,6 +2,8 @@
 
 **Disclaimer. I've only run spell checking on this document, and therefore some other documents could contain spelling errors.**
 
+[**Watch a demo of this project here**](https://youtu.be/WOfc0G8SM0c)
+
 ## Summary
 The project Fakeflix is my submission to the CS50W final project. This project takes its inspiration from Netflix but does not make an identical clone. Instead, this project features a collection of media (Movies/series) of which we store information like title, date, genre, trailer, etc. This information can be seen by users and changed by editors. The project, therefore, features a dual login system and two environments for the different users. Furthermore, the project features password recovery functionality.
 
