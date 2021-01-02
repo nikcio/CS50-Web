@@ -64,9 +64,3 @@ This design was used to get an idea of how the website would look and feel.
 ## Packages
 
 This project uses `Pillow` to store images.
-
-## Questions
-
-If I've left anything out please contact me I would very much like to complete this course with this year's curriculum.
-
-Email: nikolajgive@gmail.com
