@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static '/webapp/css/newMedia.css' %}">
+{% endblock %}
+
+{% block body %}
+    <nav class="navbar navbar-expand-lg navbar-dark" id="view-trailer">
+        <img src="{% static 'webapp/img/logo-small.png' %}" alt="Logo">
+
+        <a href="{% url 'editor_series' %}" class="btn secondary">Go back</a>
+    </nav>
+
+    <section id="new-media">
+        <h1 id="title">New series</h1>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="SeriesTitle">Title:</label>
+              <input type="text" class="form-control" id="SeriesTitle" placeholder="Title" name="{{ form.title.html_name }}">
+                {% for error in form.title.errors %}
+                <p style="color: white">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label for="Genre">Genre:</label>
+                <input type="text" class="form-control" id="Genre" placeholder="Genre" name="{{ form.genre.html_name }}">
+                {% for error in form.genre.errors %}
+                <p style="color: white">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label for="TrailerUrl">Trailer url:</label>
+                <input type="url" class="form-control" id="TrailerUrl" placeholder="youtube.com" name="{{ form.trailerUrl.html_name }}">
+                {% for error in form.trailerUrl.errors %}
+                <p style="color: white">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label for="Date">Date:</label>
+                <input type="text" class="form-control" id="Date" placeholder="01/14/2020" name="{{ form.date.html_name }}">
+                {% for error in form.date.errors %}
+                <p style="color: white">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label for="Seasons">Seasons:</label>
+                <input type="number" class="form-control" id="Seasons" placeholder="1" name="{{ form.seasons.html_name }}">
+                {% for error in form.seasons.errors %}
+                <p style="color: white">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label for="Description">Description:</label>
+                <input type="text" class="form-control" id="Description" placeholder="" name="{{ form.description.html_name }}">
+                {% for error in form.description.errors %}
+                <p style="color: white">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label for="Image">Image:</label>
+                <input type="file" class="form-control" id="Image" accept="image/*" name="{{ form.image.html_name }}">
+                {% for error in form.image.errors %}
+                <p style="color: white">{{ error }}</p>
+                {% endfor %}
+            </div>
+            <input type="hidden" value="True" name="{{ form.isSeries.html_name }}">
+            <input type="hidden" value="{{user.id}}" name="{{ form.editor.html_name }}">
+            <div class="login-controls">
+                <button type="submit" class="btn btn-primary">Add series</button></div>
+          </form>
+    </section>
+{% endblock %}

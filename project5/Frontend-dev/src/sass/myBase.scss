@@ -1,0 +1,9 @@
+@import "colors";
+@import "navigation.scss";
+@import "footer-navigation";
+
+#body{
+    background: $BackgroundColor;
+    color: $TextColor;
+    font-family: 'Roboto Condensed', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}

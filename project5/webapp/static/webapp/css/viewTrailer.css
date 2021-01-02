@@ -1,0 +1,31 @@
+@media only screen and (max-width: 450px) {
+  nav#view-trailer img {
+    width: 150px; } }
+
+nav#view-trailer button, nav#view-trailer a {
+  font-weight: bold;
+  margin: 5px;
+  display: inline-block;
+  font-size: 30px;
+  padding: 5px;
+  border-radius: 10px;
+  color: #FFF; }
+  @media only screen and (max-width: 450px) {
+    nav#view-trailer button, nav#view-trailer a {
+      font-size: 20px; } }
+
+nav#view-trailer .secondary {
+  background-color: transparent;
+  border: 2px solid #FFF; }
+
+nav#view-trailer .secondary:hover {
+  background-color: rgba(229, 9, 20, 0.5); }
+
+iframe {
+  padding: 40px;
+  margin-top: 50px;
+  width: 100%;
+  height: 95vh; }
+  @media only screen and (max-width: 450px) {
+    iframe {
+      height: 65vh; } }

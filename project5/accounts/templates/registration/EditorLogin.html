@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static '/accounts/css/LoginScreen.css' %}">
+{% endblock %}
+
+{% block body %}
+    <section id="login">
+        <img src="{% static 'webapp/img/Logo-big.png' %}" id="logo" alt="Logo">
+        <span id="title">Editor login</span>
+
+        {% if form.errors %}
+            <p>Your username and password didn't match. Please try again.</p>
+        {% endif %}
+
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="Username">Username:</label>
+              <input type="text" class="form-control" id="Username" placeholder="Enter username" name="{{ form.username.html_name }}">
+                {% for error in form.username.errors %}
+            <p style="color: white">{{ error }}</p>
+            {% endfor %}
+            </div>
+            <div class="form-group">
+              <label for="Password">Password:</label>
+              <input type="password" class="form-control" id="Password" placeholder="Password" name="{{ form.password.html_name }}">
+                {% for error in form.password.errors %}
+            <p style="color: white">{{ error }}</p>
+            {% endfor %}
+            </div>
+
+            <div class="login-controls">
+                <button type="submit" class="btn btn-primary">Login</button></div>
+                <input type="hidden" name="next" value="{% url next %}">
+          </form>
+    </section>
+{% endblock %}

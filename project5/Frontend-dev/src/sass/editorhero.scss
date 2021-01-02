@@ -1,0 +1,47 @@
+@import 'Colors';
+
+#manage{
+    height: 50vh;
+
+    .buttons{
+        height: 100%;
+        width: 80vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+
+        button, a{
+            color: $TextColor;
+            background-color: $ControlColor;
+            font-weight: bold;
+            margin: 5px;
+            width: 35%;
+            display: inline-block;
+            font-size: 30px;
+            padding: 5px;
+            border-radius: 10px;
+            border: 3px solid $ControlColor;
+
+            @media only screen and (max-width: 600px) {
+                font-size: 20px;
+                width: 80%;
+            }
+
+            
+        }
+
+        button:hover, a:hover{
+            background-color: rgba($ControlColor, 0.5);
+        }
+
+        .secondary{
+            background-color: transparent;
+            border: 3px solid $ControlColor;
+        }
+
+        .secondary:hover{
+            background-color: rgba($ControlColor, 0.5);
+        }
+    }
+}

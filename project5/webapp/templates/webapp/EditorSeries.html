@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static '/webapp/css/home.css' %}">
+    <link rel="stylesheet" href="{% static '/webapp/css/editorhero.css' %}">
+{% endblock %}
+
+{% block body %}
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <img src="{% static 'webapp/img/logo-small.png' %}" alt="Logo">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'editor_home' %}">Movies</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'editor_series' %}">Series</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- endinject -->
+
+    <section id="manage">
+        <div class="buttons">
+            <a href="{% url 'editor_new_movie' %}" class="btn secondary">New movie</a>
+            <a href="{% url 'editor_new_series' %}" class="btn">New series</a>
+        </div>
+    </section>
+
+    <section id="all-movies">
+        <h2>All series</h2>
+        <div class="row">
+            {% for item in page_obj %}
+            <div class="mediaItem" data-id="{{item.id}}">
+                <button type="button" data-toggle="modal" data-target="#exampleModal" class="details">
+                    <img src="{{item.image.url}}" alt="">
+                    <span class="mediaTitle">{{item.title}}</span>
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section id="details">
+        <!-- inject:partial:partials/editorDetails.html -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <div class="header-image" alt=""></div>
+                  <h3 class="title">TITLE GOES HERE</h3>
+                  <button type="button" class="close close-modal" data-dismiss="modal" aria-label="Close">
+                    <span class="iconify" data-inline="false" data-icon="radix-icons:cross-2" style="color: #ffffff; font-size: 25px;"></span>
+                  </button>
+                  <button type="button" class="save-modal" data-save="{% if item in saved %}true{% else %}false{% endif %}">
+                      {% if item in saved %}
+                    <span class="iconify" data-inline="false" data-icon="ant-design:heart-filled" style="color: red; font-size: 25px;"></span>
+                      {% else %}
+                    <span class="iconify" data-inline="false" data-icon="ant-design:heart-outlined" style="color: #ffffff; font-size: 25px;"></span>
+                      {% endif %}
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-12 col-sm">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pretium cras amet, mattis auctor mauris sit pretium. Sem elit, gravida tincidunt venenatis eget sit aliquet. Id sed velit felis bibendum aliquam facilisi. Non duis sit donec leo sit nam. Tristique volutpat proin senectus in leo, posuere lorem morbi ultrices. Faucibus tincidunt fermentum, est rutrum sit tempus elit. Elit sit ut nec, sit lacinia eu arcu at. Feugiat elementum in in amet. Maecenas sit platea sed diam consequat, odio blandit. Mauris magnis nunc gravida mi, varius mi.</p>
+                    </div>
+
+                    <div class="col-12 col-sm">
+                        <a type="button" class="btn view-trailer">View trailer</a>
+                        <span><strong>Genre:</strong> Action</span>
+                        <span><strong>Date:</strong> September 2020</span>
+
+                        <a type="button" class="btn edit">Edit</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- endinject -->
+    </section>
+
+    <!-- inject:partial:partials/footer.html -->
+    <section id="footer">
+      <nav>
+      {% if is_paginated %}
+        <ul class="pagination">
+          <li class="page-item">
+          {% if page_obj.has_previous %}
+            <a class="page-link disabled" tabindex="-1">
+                <span
+              class="iconify left"
+              data-inline="true"
+              data-icon="bx:bxs-chevron-left"
+            ></span>
+                Prev
+            </a>
+          {% else %}
+              <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">
+                <span
+              class="iconify left"
+              data-inline="true"
+              data-icon="bx:bxs-chevron-left"
+            ></span>
+                Prev
+            </a>
+          {% endif %}
+          </li>
+          <li class="page-item active">
+            <a class="page-link page-num">{{ page_obj.number }}</a>
+          </li>
+          <li class="page-item">
+          {% if page_obj.has_next %}
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next
+                <span
+                class="iconify right"
+                data-inline="true"
+                data-icon="bx:bxs-chevron-right"
+              ></span>
+            </a>
+          {% else %}
+              <a class="page-link disabled">Next
+                <span
+                class="iconify right"
+                data-inline="true"
+                data-icon="bx:bxs-chevron-right"
+              ></span>
+            </a>
+          {% endif %}
+
+          </li>
+        </ul>
+      {% endif %}
+      </nav>
+    </section>
+{% endblock %}
+
+{% block js %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.iconify.design/1/1.0.4/iconify.min.js"></script>
+    <script src="{% static 'webapp/js/combined.js' %}"></script>
+{% endblock %}
